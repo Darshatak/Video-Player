@@ -1,0 +1,136 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+.vid-container{
+    width: 90%;
+    max-width: 900px;
+    margin-inline: auto;
+    position: relative;
+}
+video{
+    width: 100%;
+}
+
+.vid-controls{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* background-color: beige; */
+    color: white;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.vid-container:hover .vid-controls,
+.vid-container:focus-within .vid-controls,
+.vid-container.paused .vid-controls{
+    opacity: 1;
+}
+
+.vid-controls .controls{
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+    align-items: center;
+}
+
+.vid-controls::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0, .75), transparent);
+    width: 100%;
+    aspect-ratio: 6/1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.vid-controls .controls button{
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 150ms ease-in-out;
+}
+
+.vid-controls .controls button:hover{
+    opacity: 1;
+}
+
+.vid-container.paused .pause-icon{
+    display: none;
+}
+
+.vid-container:not(.paused) .play-icon{
+    display: none;
+}
+
+.vid-container.full-screen{
+    max-width: initial;
+    width: 100%;
+}
+.vid-container.full-screen{
+    max-height: 100vh;
+}
+
+
+.vid-container.full-screen .open{
+    display: none;
+}
+
+.vid-container:not(.full-screen) .close{
+    display: none;
+}
+
+.volume-high-icon,
+.volume-low-icon,
+.volume-muted-icon{
+    display: none;
+}
+
+.vid-container[data-volume-level="high"] .volume-high-icon{
+    display: block;
+}
+.vid-container[data-volume-level="low"] .volume-low-icon{
+    display: block;
+}
+.vid-container[data-volume-level="muted"] .volume-muted-icon{
+    display: block;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+}
+
+.volume-slider{
+    width: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.volume-container:hover .volume-slider,
+.volume-slider:focus-within{
+    width: 100px;
+    transform: scale(1);
+    
+}
+.duration-container{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-grow: 1;
+}
