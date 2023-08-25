@@ -4,6 +4,7 @@ const miniPlayerbtn = document.querySelector(".mini-player-btn")
 
 const muteBtn = document.querySelector(".mute-btn")
 const volumeSlider = document.querySelector(".volume-slider")
+const speedBtn = document.querySelector(".speed-btn")
 
 const currentTimeElem = document.querySelector(".current-time")
 const totalTimeElem = document.querySelector(".total-time")
@@ -31,9 +32,25 @@ document.addEventListener("keydown", e =>{
         case "m":
             toggleMute()
             break;
+        case "arrowleft":
+        case "j" :
+            skip(-5)
+            break;
+        case "arrowright":
+        case "l" :
+            skip(-5)
+            break;
     }
 })
 
+
+speedBtn.addEventListener("click", changePlaybackSpeed)
+function changePlaybackSpeed(){
+    let newPlayBackRate = video.playbackRate + 0.25
+    if (newPlayBackRate >2) newPlayBackRate = 0.25
+    video.playbackRate = newPlayBackRate
+    speedBtn.textContent = `${newPlayBackRate}x`
+}
 
 //duration
 video.addEventListener("loadeddata", ()=> {
@@ -58,6 +75,10 @@ function formatDuration(time){
 }
 
 
+
+function skip(duration) {
+    video.currentTime += duration
+}
 
 //play or pause
 playPausebtn.addEventListener("click", togglePlay)

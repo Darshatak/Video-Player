@@ -134,3 +134,70 @@ video{
     gap: 4px;
     flex-grow: 1;
 }
+
+.vid-controls .controls button.wide-btn {
+    width: 50px;
+}
+
+.timeline{
+    /* height: 35px; */
+    margin-inline: 8px;
+    cursor: pointer;
+    /* display: flex;
+    align-items: center; */
+}
+
+
+.timlin{
+    background-color: rgba(100, 100, 100, 0.5);
+    height: 3px;
+    width: 100%;
+    position: relative;
+}
+
+.timlin::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--preview-position) * 100%);
+    background-color: rgb(150, 150, 150);
+    display: none;
+}
+
+
+.timlin::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--progress-position) * 100%);
+    background-color: red;
+}
+
+.timlin .thumb-indicator{
+    --scale: 0;
+    position: absolute;
+    transform: translateX(-50%) scale(var(--scale));
+    height: 200%;
+    top: -50%;
+    left: calc(var(--progress-position) * 100%);
+    background-color: red;
+    border-radius: 50%;
+    transition: transform 150ms ease-in-out;
+    aspect-ratio: 1/1;
+}
+
+.timeline:hover .timlin::before {
+    display: block;
+}
+
+.timlin .thumb-indicator{
+    --scale: 1;
+}
+ 
+.timeline:hover .timlin{
+    height: 100%;
+}
